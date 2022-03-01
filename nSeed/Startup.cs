@@ -11,6 +11,8 @@ using nSeed.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace nSeed
@@ -20,6 +22,8 @@ namespace nSeed
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            // TODO STARTUP CODE HERE, INITIALIZING QBIT AND HTTPHANDLER
         }
 
         public IConfiguration Configuration { get; }
@@ -52,10 +56,26 @@ namespace nSeed
                 }
             );
 
+
             services.AddAuthorization(options => {
                 options.AddPolicy("RequireAdministratorRole",
                     builder => builder.RequireRole("admin"));
             });
+
+            var cookiecontainer = new CookieContainer();
+            services.AddSingleton(cookiecontainer);
+
+            services.AddHttpClient("myhttpclient")
+                .ConfigurePrimaryHttpMessageHandler((c) => new HttpClientHandler
+                {
+                    AllowAutoRedirect = false,
+                    //MaxAutomaticRedirections = 5,
+                    UseCookies = true,
+                    CookieContainer = cookiecontainer,
+                });
+
+            // use : var cont = HttpContext.RequestServices.GetService<CookieContainer>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
