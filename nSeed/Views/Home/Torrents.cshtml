@@ -1,0 +1,506 @@
+﻿
+@{
+    ViewData["Title"] = "Torrents";
+}
+
+<h1>Torrents loaded</h1>
+
+
+<div id="kategoriak">
+    <form method="post" action="/Torrentss" id="kereses_mezo" name="kereses_mezo" onsubmit="return nevHosszEllenorzes();">
+        <table id="table_torrcat" width="720">
+            <tbody>
+                <tr>
+                    <td width="20"><input type="checkbox" onclick="lenyitKereso('filmek_resz');" name="nyit_filmek_resz" value="true"></td>
+                    <td width="60"><a href="#">Film</a></td>
+                    <td width="20"><input type="checkbox" onclick="lenyitKereso('sorozat_resz');" name="nyit_sorozat_resz" value="true"></td>
+                    <td width="60"><a href="#">Sorozat</a></td>
+                    <td width="20"><input type="checkbox" onclick="lenyitKereso('zene_resz');" name="nyit_zene_resz" value="true"></td>
+                    <td width="60"><a href="#">Zene</a></td>
+                    <td width="20"><input type="checkbox" onclick="lenyitKereso('xxx_resz');" name="nyit_xxx_resz" value="true"></td>
+                    <td width="60"><a href="#">XXX</a></td>
+                    <td width="20"><input type="checkbox" onclick="lenyitKereso('jatek_resz');" name="nyit_jatek_resz" value="true"></td>
+                    <td width="60"><a href="#">Játék</a></td>
+                    <td width="20"><input type="checkbox" onclick="lenyitKereso('prg_resz');" name="nyit_prog_resz" value="true"></td>
+                    <td width="60"><a href="#">Program</a></td>
+                    <td width="20"><input type="checkbox" onclick="lenyitKereso('konyv_resz');" name="nyit_konyv_resz" value="true"></td>
+                    <td width="60"><a href="#">Könyv</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="display:none;width:840;" id="filmek_resz">
+            <table width="840" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td width="80"><a href="javascript:markAll('filmek_resz');">Film</a>:</td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_xvid_hun" type="checkbox" onclick="tipust_valt();" value="xvid_hun"></td>
+                        <td width="75"><a title="Filmek tömörített formátumban, magyarul." a href="#">SD/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_xvid" type="checkbox" onclick="tipust_valt();" value="xvid"></td>
+                        <td width="75"><a title="Filmek tömörített formátumban, angolul." a href="#">SD/EN</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_dvd_hun" type="checkbox" onclick="tipust_valt();" value="dvd_hun"></td>
+                        <td width="75"><a title="Filmek DVD-n, magyarul." a href="#">DVDR/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_dvd" type="checkbox" onclick="tipust_valt();" value="dvd"></td>
+                        <td width="75"><a title="Filmek DVD-n, angolul." a href="#">DVDR/EN</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_dvd9_hun" type="checkbox" onclick="tipust_valt();" value="dvd9_hun"></td>
+                        <td width="75"><a title="Filmek DVD9 formátumban magyarul." a href="#">DVD9/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_dvd9" type="checkbox" onclick="tipust_valt();" value="dvd9"></td>
+                        <td width="75"><a title="Filmek DVD9 formátumban angolul." a href="#">DVD9/EN</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_hd_hun" type="checkbox" onclick="tipust_valt();" value="hd_hun"></td>
+                        <td width="75"><a title="Nagyfelbontású filmek HD-n, magyarul." a href="#">HD/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_hd" type="checkbox" onclick="tipust_valt();" value="hd"></td>
+                        <td width="75"><a title="Nagyfelbontású filmek HD-n, angolul." a href="#">HD/EN</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="display:none;width:840;" id="sorozat_resz">
+            <table width="840" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td width="80"><a href="javascript:void(0);" onclick="markAll('sorozat_resz');">Sorozat</a>:</td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_xvidser_hun" type="checkbox" value="xvidser_hun" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Sorozatok SD felbontásban magyarul." a href="#">SD/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_xvidser" type="checkbox" value="xvidser" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Sorozatok SD felbontásban angolul." a href="#">SD/EN</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_dvdser_hun" type="checkbox" value="dvdser_hun" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Sorozatok DVD-n magyarul." a href="#">DVDR/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_dvdser" type="checkbox" value="dvdser" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Sorozatok DVD-n angolul." a href="#">DVDR/EN</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_hdser_hun" type="checkbox" value="hdser_hun" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Nagyfelbontású sorozatok HD-n magyarul." a href="#">HD/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_hdser" type="checkbox" value="hdser" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Nagyfelbontású sorozatok HD-n angolul." a href="#">HD/EN</a></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="display:none;width:840;" id="zene_resz">
+            <table width="840" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td width="80"><a href="javascript:void(0);" onclick="markAll('zene_resz');">Zene</a>:</td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_mp3_hun" type="checkbox" value="mp3_hun" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Zene magyar előadóktól (MP3)." a href="#">MP3/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_mp3" type="checkbox" value="mp3" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Zene külföldi előadóktól (MP3)." a href="#">MP3/EN</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_lossless_hun" type="checkbox" value="lossless_hun" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Lossless, azaz veszteségmentes formátumú zene magyar eloadótól (APE/FLAC/DTS/WAV)." a href="#">Lossless/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_lossless" type="checkbox" value="lossless" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Lossless, azaz veszteségmentes formátumú zene külföldi eloadótól (APE/FLAC/DTS/WAV)." a href="#">Lossless/EN</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_clip" type="checkbox" value="clip" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Koncertek, Zenei anyagok." a href="#">Klip</a></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="display:none;width:840;" id="xxx_resz">
+            <table width="840" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td width="80"><a href="javascript:void(0);" onclick="markAll('xxx_resz');">XXX</a>:</td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_xxx_xvid" type="checkbox" value="xxx_xvid" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Erotikus tartalom." a href="#">SD</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_xxx_dvd" type="checkbox" value="xxx_dvd" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Erotikus tartalom (DVD)." a href="#">DVDR</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_xxx_imageset" type="checkbox" value="xxx_imageset" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Erotikus tartalom (Képsorozatok)." a href="#">Imageset</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_xxx_hd" type="checkbox" value="xxx_hd" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Erotikus tartalom (HD)." a href="#">HD</a></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="display:none;width:840;" id="jatek_resz">
+            <table width="840" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td width="80"><a href="javascript:void(0);" onclick="markAll('jatek_resz');">Játék</a>:</td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_game_iso" type="checkbox" value="game_iso" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Játékok CD/DVD képben." a href="#">PC/ISO</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_game_rip" type="checkbox" value="game_rip" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Játék RIP-ek, törések, egyéb." a href="#">PC/RIP</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_console" type="checkbox" value="console" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Játékok Xbox-ra, PS-re, PSP-re, GC-re, Wii-re." a href="#">Konzol</a></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="display:none;width:840;" id="prg_resz">
+            <table width="840" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td width="80"><a href="javascript:void(0);" onclick="markAll('prg_resz');">Program</a>:</td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_iso" type="checkbox" value="iso" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Szoftverek, programok CD/DVD képben." a href="#">Prog/ISO</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_misc" type="checkbox" value="misc" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Programok/Egyéb" a href="#">Prog/RIP</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_mobil" type="checkbox" value="mobil" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Programok és játékok mobilra." a href="#">Prog/Mobil</a></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="display:none;width:840;" id="konyv_resz">
+            <table width="840" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td width="80"><a href="javascript:void(0);" onclick="markAll('konyv_resz');">Könyv</a>:</td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_ebook_hun" type="checkbox" value="ebook_hun" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Könyvek, dokumentációk, tananyagok, eBook-ok magyarul." a href="#">eBook/HU</a></td>
+                        <td width="20"><input name="kivalasztott_tipus[]" id="check_ebook" type="checkbox" value="ebook" onclick="tipust_valt();"></td>
+                        <td width="75"><a title="Könyvek, dokumentációk, tananyagok, eBook-ok angolul." a href="#">eBook/EN</a></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="80"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                        <td width="20"></td>
+                        <td width="75"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="hr_stuff"></div>
+        <center>
+            <table id="keresoresz" style="width: 700px">
+                <tbody>
+                    <tr>
+                        <!--[if IE]>
+                            <input type="submit" value="" style="height:0px;width:1px;border:none;background:transparent;">
+                        <![endif]-->
+                        <td style="text-align:left;" width="80">Keresés:</td>
+                        <td width="150">
+                            <input id="mire" type="text" name="mire" value="" class="keresesMezo">
+                        </td>
+                        <td style="text-align:center;" width="20"> - </td>
+                        <td width="130">
+                            <select name="miben" class="valasztasMezo" style="width:130px;">
+                                <option value="name">Címben</option>
+                                <option value="leiras">Leírásban</option>
+                                <option value="imdb">IMDb</option>
+                                <option value="uploaded_by_nev">Feltöltő nevére</option>
+                                <option value="cimke">Címke</option>
+                            </select>
+                        </td>
+                        <td style="text-align:center;" width="20"> - </td>
+                        <td width="130">
+                            <select name="tipus" id="listazasi_tipus" class="valasztasMezo">
+                                <option value="all_own">Összes saját típusban</option>
+                                <option value="all">Összes típusban</option>
+                                <option value="kivalasztottak_kozott">Kiválasztott típusokban</option>
+                                <option value="legal">Legális torrentekben</option>
+                                <option value="eredeti_releasekben">Eredeti release-ekben</option>
+                                <option value="all"></option>
+                                <option value="xvid_hun">Film (HUN SD)</option>
+                                <option value="xvid">Film (ENG SD)</option>
+                                <option value="dvd_hun">Film (HUN DVD)</option>
+                                <option value="dvd">Film (ENG DVD)</option>
+                                <option value="dvd9_hun">Film (HUN DVD9)</option>
+                                <option value="dvd9">Film (ENG DVD9)</option>
+                                <option value="hd_hun">Film (HUN HD)</option>
+                                <option value="hd">Film (ENG HD)</option>
+                                <option value="xvidser_hun">Sorozat (HUN SD)</option>
+                                <option value="xvidser">Sorozat (ENG SD)</option>
+                                <option value="dvdser_hun">Sorozat (HUN DVD)</option>
+                                <option value="dvdser">Sorozat (ENG DVD)</option>
+                                <option value="hdser_hun">Sorozat (HUN HD)</option>
+                                <option value="hdser">Sorozat (ENG HD)</option>
+                                <option value="mp3_hun">Mp3 (HUN)</option>
+                                <option value="mp3">Mp3 (ENG)</option>
+                                <option value="lossless_hun">Lossless (HUN)</option>
+                                <option value="lossless">Lossless (ENG)</option>
+                                <option value="clip">Klip</option>
+                                <option value="game_iso">Játék (ISO)</option>
+                                <option value="game_rip">Játék (RIP)</option>
+                                <option value="console">Konzol</option>
+                                <option value="ebook_hun">e-Book (HUN)</option>
+                                <option value="ebook">e-Book (ENG)</option>
+                                <option value="iso">Program (ISO)</option>
+                                <option value="misc">Program</option>
+                                <option value="mobil">Mobil</option>
+                                <option value="xxx_xvid">XXX (SD)</option>
+                                <option value="xxx_dvd">XXX (DVD/DVD9)</option>
+                                <option value="xxx_imageset">XXX (Imageset)</option>
+                                <option value="xxx_hd">XXX (HD)</option>
+                            </select>
+                        </td>
+                        <td width="100"></td>
+                        <td style="padding-left:15px;" width="100" align="center"><input type="image" value="MEHET" name="submit" class="g_mehet btn btn-primary" src="https://i.imgur.com/oAWBv4r.png"></td>
+                    </tr>
+                    <tr height="5">
+                        <td colspan="8"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;" width="80">Címkék:  </td>
+                        <td><input value="" type="text" id="tags" name="tags" class="keresesMezo" style="width:150px;"></td>
+                        <td></td>
+                        <td style="text-align:left;" nowrap=""><a href="javascript:void(0);" onclick="showTags();"><span id="cimke_text">[címkék mutatása]</span></a></td>
+                        <td colspan="3"></td>
+                        <td style="padding-left:15px;" nowrap="" align="center">
+                            <a href="/torrents.php" style="padding-top:5px;">[feltételek törlése]</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+        <div id="cimkek_lista" style="display:none;padding-left:0;text-align:left;">
+            <div class="hr_stuff"></div>
+            <center>
+                <table style="padding-top:5px;padding-bottom:5px;padding-left:10px;" width="890" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr height="20"><td colspan="7" align="left"><input type="checkbox" name="inverz_tags"> Inverz címkék (a kiválasztottak ne szerepeljenek)</td></tr>
+                        <tr height="10"><td colspan="7"></td></tr>
+                        <tr height="20"><td colspan="7" align="left">Filmek:</td></tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('vígjáték');">vígjáték</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('dráma');">dráma</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('életrajz');">életrajz</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('akció');">akció</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('romantikus');">romantikus</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('dokumentumfilm');">dokumentumfilm</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('kaland');">kaland</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('animáció');">animáció</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('thriller');">thriller</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('családi');">családi</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('bűnügyi');">bűnügyi</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('rövidfilm');">rövidfilm</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('musical');">musical</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('sci-fi');">sci-fi</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('misztikus');">misztikus</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('háborús');">háborús</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('western');">western</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('horror');">horror</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('történelmi');">történelmi</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('sport');">sport</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('zene');">zene</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('ismeretterjesztő');">ismeretterjesztő</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('valóságshow');">valóságshow</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('3D');">3D</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('fantasy');">fantasy</a></td>
+                        </tr>
+                        <tr height="20"><td colspan="7" align="left">Zenék:</td></tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('60s');">60s</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('70s');">70s</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('80s');">80s</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('90s');">90s</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('alternative');">alternative</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('blues');">blues</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('breaks');">breaks</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('classical');">classical</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('country');">country</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('dance');">dance</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('drum.and.bass');">drum.and.bass</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('electronic');">electronic</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('folk');">folk</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('funk');">funk</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('garage');">garage</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('grunge');">grunge</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('hardcore');">hardcore</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('hardcore.dance');">hardcore.dance</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('hip.hop');">hip.hop</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('house');">house</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('industrial');">industrial</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('jazz');">jazz</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('metal');">metal</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('new.age');">new.age</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('ost');">ost</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('pop');">pop</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('pop.rock');">pop.rock</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('progressive.rock');">progressive.rock</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('psychedelic');">psychedelic</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('psytrance');">psytrance</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('punk');">punk</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('reggae');">reggae</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('rhythm.and.blues');">rhythm.and.blues</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('rock');">rock</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('ska');">ska</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('soul');">soul</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('techno');">techno</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('trance');">trance</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('trip.hop');">trip.hop</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('uk.garage');">uk.garage</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('world.music');">world.music</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('acid');">acid</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('emo');">emo</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('death.metal');">death.metal</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('disco');">disco</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('europop');">europop</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('goa.trance');">goa.trance</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('hardstyle');">hardstyle</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('indie.rock');">indie.rock</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('musical');">musical</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('progressive.house');">progressive.house</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('progressive.trance');">progressive.trance</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('italo.disco');">italo.disco</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('live');">live</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('dub');">dub</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('experimental');">experimental</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('ambient');">ambient</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('latin');">latin</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('synth.pop');">synth.pop</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('euro.house');">euro.house</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('eurodance');">eurodance</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('euro.disco');">euro.disco</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('dubstep');">dubstep</a></td>
+                        </tr>
+                        <tr height="20"><td colspan="7" align="left">Ebook:</td></tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('életmód.egészség');">életmód.egészség</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('erotika');">erotika</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('ezoterika');">ezoterika</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('gasztronómia');">gasztronómia</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('gyermek');">gyermek</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('hangoskönyv');">hangoskönyv</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('hobbi');">hobbi</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('irodalom');">irodalom</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('kert.és.lakás');">kert.és.lakás</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('lexikon.enciklopédia');">lexikon.enciklopédia</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('magazin');">magazin</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('manga.képregény');">manga.képregény</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('művészet');">művészet</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('pénz.befektetés.üzlet');">pénz.befektetés.üzlet</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('sport');">sport</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('szakkönyv');">szakkönyv</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('számítástechnika');">számítástechnika</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('szórakoztató.irodalom');">szórakoztató.irodalom</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('szótár.nyelvkönyv');">szótár.nyelvkönyv</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('tankönyv.segédkönyv');">tankönyv.segédkönyv</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('társadalomtudomány');">társadalomtudomány</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('természettudomány');">természettudomány</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('történelem');">történelem</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('utazás');">utazás</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('vallás');">vallás</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('zene');">zene</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('sci-fi');">sci-fi</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('fantasy');">fantasy</a></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('romantikus');">romantikus</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('hadászat');">hadászat</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('ismeretterjesztő');">ismeretterjesztő</a></td>
+                            <td width="14%" align="left"><a style="font-weight:normal;" href="javascript:void(0);" onclick="addTag('szépirodalom');">szépirodalom</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>
+        </div>
+    </form>
+    <div class="hr_stuff" id="letoltes_hr"></div>
+</div>
+
+
+<script>
+    function lenyitKereso(id) {
+        var dom_lenyit = document.getElementById(id);
+        if (!dom_lenyit) return false;
+        dom_lenyit.style.display = dom_lenyit.style.display == "none" ? "block" : "none";
+        if (dom_lenyit.style.display == 'none') {
+            var inner_tags = dom_lenyit.getElementsByTagName('input');
+            for (i = 0; i < inner_tags.length; i++) {
+                inner_tags[i].checked = false;
+            }
+        }
+    }
+    function tipust_valt() {
+        var list = document.getElementById('listazasi_tipus');
+        list.selectedIndex = 2;
+    }
+    function showTags() {
+        if (document.getElementById('cimkek_lista').style.display == 'none') {
+            document.getElementById('cimkek_lista').style.display = '';
+            document.getElementById('cimke_text').innerHTML = '[címkék elrejtése]';
+        } else {
+            document.getElementById('cimkek_lista').style.display = 'none';
+            document.getElementById('cimke_text').innerHTML = '[címkék mutatása]';
+        }
+    }
+    function addTag(mit) {
+        var added = document.getElementById('tags').value.toLowerCase();
+        var matchRe = new RegExp(mit.toLowerCase());
+        if (matchRe.test(added)) return false;
+        document.getElementById('tags').value = document.getElementById('tags').value.replace(/,[ ]*$/, '');
+        document.getElementById('tags').value += (added ? ', ' : '') + mit;
+        return true;
+    }
+    function nevHosszEllenorzes() {
+        if (document.kereses_mezo.mire.value && document.kereses_mezo.mire.value.length < 3) {
+            alert("FIGYELMEZTETÉS!\r\n\r\nA keresendő: '" + document.kereses_mezo.mire.value + "' rövidebb, mint 3 karakter hosszú!\r\n\r\nA keresés nem folytatódik, írj be hosszabb nevet!");
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
