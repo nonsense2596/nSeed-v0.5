@@ -18,7 +18,7 @@ namespace nSeed.Models
         public string? nyit_jatek_resz { get; set; }
         public string? nyit_prog_resz { get; set; }
         public string? nyit_konyv_resz { get; set; }
-        public string[] kivalasztott_tipus { get; set; }
+        public string[]? kivalasztott_tipus { get; set; }
         public string mire { get; set; }
         public string miben { get; set; }
         public string tipus { get; set; }
@@ -31,15 +31,15 @@ namespace nSeed.Models
         public NameValueCollection GetPostParametersDict()
         {
             var dict = new NameValueCollection
-                {
-                    {"kivalasztott_tipus[]",string.Join(",", kivalasztott_tipus)},
-                    {"mire", mire},
-                    {"miben", miben},
-                    {"tipus", tipus},
-                    {"submit.x", submit_x.ToString()}, // todo what this
-                    {"submit.y", submit_y.ToString()}, // todo what this
-                    {"tags", tags}
-                };
+            {
+                {"mire", mire},
+                {"miben", miben},
+                {"tipus", tipus},
+                {"submit.x", submit_x.ToString()}, // todo what this
+                {"submit.y", submit_y.ToString()}, // todo what this
+                {"tags", tags}
+            };
+            if (kivalasztott_tipus != null) { dict.Add("kivalasztott_tipus[]", string.Join(",", kivalasztott_tipus)); }
             if (nyit_filmek_resz != null) { dict.Add("nyit_filmek_resz", nyit_filmek_resz); }
             if (nyit_sorozat_resz != null) { dict.Add("nyit_sorozat_resz", nyit_sorozat_resz);}
             if (nyit_zene_resz != null) { dict.Add("nyit_zene_resz", nyit_zene_resz); }
