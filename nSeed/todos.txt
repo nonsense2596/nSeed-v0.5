@@ -1,1 +1,11 @@
-﻿1. debug post parameters. too much parameter is required right now that should not be that crashes with nullpointerexception
+﻿1. hardcoded port in _torrentsearchresultstable.cshtml
+
+2. in _torrentsearchresultstable.cshtml, make the click event handlers only reside in javascript, and out of the html part
+
+3. implementing more search methods described in TorrentSearchPostData.cs
+
+4. todo proper torrent download location scheme
+4.1 proper path and name
+
+
+5. invoke the qbit api @ torrent download
