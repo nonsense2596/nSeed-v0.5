@@ -17,13 +17,13 @@
             <tr>
                 <td>
                     <div class="btn btn-primary" style="cursor:pointer;" onclick="download(@item.Id);">
-                        <a href="@item.DownloadUrl">
-                            DL
-                        </a>
+                        DL
                     </div>
                 </td>
                 <td>
-                    @item.Name
+                    <a href="JavaScript:void(0);" onclick="details(@item.Id)">
+                        @item.Name
+                    </a>
                 </td>
                 <td>
                     @item.Categ
@@ -48,7 +48,22 @@
     </tbody>
 </table>
 <script>
-        function download(id) {
-
+    function download(id) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://localhost:44325/", true);
+        xhr.send();
+    }
+    function details(id) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `https://localhost:44325/torrentdetails/${id}`, true);
+        xhr.send();
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                var data = xhr.responseText;
+                alert(data);
+                var arr = JSON.parse(data);
+                alert(arr);
+            }
         }
+    }
 </script>

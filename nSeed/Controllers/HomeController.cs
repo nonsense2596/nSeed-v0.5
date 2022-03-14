@@ -82,10 +82,24 @@ namespace nSeed.Controllers
             ViewData["torrentdata"] = torrentsearchresultdata;
             return View();
 
-
-
         }
 
+
+
+        // CURRENT WRITING FRONT HERE
+
+        [HttpGet("torrentdetails/{id}")]
+        public async Task<IActionResult> torrentdetails(int id)
+        {
+            // MAKE A REQUEST HERE TO NSEED AND RETURN A CONTENT WITH TEXT/HTML WITH THE PARSING OF IT
+            return View("kek");
+        }
+        [HttpPost("torrentdownload/{id}")]
+        public string torrentdownload(int id)
+        {
+            // DOWNLOAD THE TORRENT FROM NSEED AND INVOKE THE QBIT API
+            return "Success!";
+        }
 
     }
 }
