@@ -51,31 +51,20 @@ namespace nSeed.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        // after we log in, we get redirected to this, which is just a static page with the search functionality
         [HttpGet("Torrents")]
         public IActionResult Torrents()
         {
-            return View();
+            return View("TorrentSearch");
         }
 
-        [HttpPost("Torrentss")]
-        public async Task<IActionResult> Torrentss([FromForm] TorrentSearchPostData tspd)
+        // the Torrents() function posts to this function, this gets its params, and proxies them to nseed, getting the resulting page from there
+        [HttpPost("TorrentSearch")]
+        public async Task<IActionResult> TorrentSearch([FromForm] TorrentSearchPostData tspd)
         {
 
-            //var pairs3 = new NameValueCollection
-            //    {
-            //        {"nyit_sorozat_resz","true"},    // TODO
-            //        {"kivalasztott_tipus[]","hdser,hdser_hun"},
-            //        {"mire","the+walking+dead"},
-            //        {"miben","name"},
-            //        {"tipus","kivalasztottak_kozott"},
-            //        {"submit.x", "1"},
-            //        {"submit.y", "1"},
-            //        {"tags",""} // TODO future
-            //    };
 
             var dictt = tspd.GetPostParametersDict();
-
-
 
             Uri uri4 = new Uri(_configuration["nseed:baseurl"]+_configuration["nseed:searchpath"]);
             var content4 = new FormUrlEncodedContent(tspd.GetPostParametersDict().ToEnumerable(true));
@@ -88,7 +77,11 @@ namespace nSeed.Controllers
             request4.Headers.ExpectContinue = false;
             var response3 = await httpClient.SendAsync(request4);
             string res3 = await response3.Content.ReadAsStringAsync();
-            return Content(res3, "text/html");
+
+            List<TorrentSearchResultData> torrentsearchresultdata = TorrentSearchResultReader.read(res3);
+            ViewData["torrentdata"] = torrentsearchresultdata;
+            return View();
+
 
 
         }

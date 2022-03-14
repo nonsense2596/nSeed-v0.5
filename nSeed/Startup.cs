@@ -23,6 +23,7 @@ namespace nSeed
         {
             Configuration = configuration;
 
+            Global.Utils.TorrentSearchResultReader.InitConfiguration(Configuration);
             // TODO STARTUP CODE HERE, INITIALIZING QBIT AND HTTPHANDLER
         }
 

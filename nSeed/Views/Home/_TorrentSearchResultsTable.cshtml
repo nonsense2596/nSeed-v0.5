@@ -1,0 +1,54 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">DL</th>
+            <th scope="col">Name</th>
+            <th scope="col">Categ</th>
+            <th scope="col">Upload</th>
+            <th scope="col">Size</th>
+            <th scope="col">Download</th>
+            <th scope="col">Seed</th>
+            <th scope="col">Leech</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewData["torrentdata"] as List<TorrentSearchResultData>)
+        {
+            <tr>
+                <td>
+                    <div class="btn btn-primary" style="cursor:pointer;" onclick="download(@item.Id);">
+                        <a href="@item.DownloadUrl">
+                            DL
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Categ
+                </td>
+                <td>
+                    @item.UploadDate
+                </td>
+                <td>
+                    @item.TorrentSize
+                </td>
+                <td>
+                    @item.Download
+                </td>
+                <td>
+                    @item.Seed
+                </td>
+                <td>
+                    @item.Leech
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+        function download(id) {
+
+        }
+</script>

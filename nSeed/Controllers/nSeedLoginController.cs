@@ -100,7 +100,7 @@ namespace nSeed
         {
             if (await DoLogin()) return RedirectToAction("Torrents", "Home");
             return Content("failed login");
-            return RedirectToAction("Torrents", "Home");
+            //return RedirectToAction("Torrents", "Home");
             try
             {
 
