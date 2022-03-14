@@ -50,7 +50,7 @@
 <script>
     function download(id) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://localhost:44325/", true);
+        xhr.open("POST", `https://localhost:44325/torrentdownload/${id}`, true);
         xhr.send();
     }
     function details(id) {
