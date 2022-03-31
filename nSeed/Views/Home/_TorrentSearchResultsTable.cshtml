@@ -44,6 +44,10 @@
                     @item.Leech
                 </td>
             </tr>
+            <tr>
+                <td colspan="8" id="details-@item.Id" style="display:none;">
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -60,9 +64,8 @@
         xhr.onload = () => {
             if (xhr.status == 200) {
                 var data = xhr.responseText;
-                alert(data);
-                var arr = JSON.parse(data);
-                alert(arr);
+                $("#details-" + id).html(data);
+                $("#details-" + id).css("display", "block");
             }
         }
     }

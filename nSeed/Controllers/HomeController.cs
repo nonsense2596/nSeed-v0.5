@@ -93,7 +93,17 @@ namespace nSeed.Controllers
         public async Task<IActionResult> torrentdetails(int id)
         {
             // MAKE A REQUEST HERE TO NSEED AND RETURN A CONTENT WITH TEXT/HTML WITH THE PARSING OF IT
-            return View("kek");
+            //return View("kek");
+
+            try
+            {
+                Uri uri = new Uri(_configuration["nseed:baseurl"] + _configuration["nseed:detailspath"] + id);
+                var response = await httpClient.GetAsync(uri);
+                var content = await response.Content.ReadAsStringAsync();
+                return Content(content);
+            }
+            catch (HttpRequestException) { }
+
         }
         [HttpPost("torrentdownload/{id}")]
         public async Task<IActionResult> torrentdownload(int id)
