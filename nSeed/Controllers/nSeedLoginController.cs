@@ -110,31 +110,6 @@ namespace nSeed
 
         }
 
-
-
-        //[HttpGet("Index2")]
-        //public async Task<IActionResult> Index2()
-        //{
-            
-        //    try
-        //    {
-
-        //        var response3 = await httpClient.GetAsync(new Uri("https://ncore.pro/torrents.php?action=download&id=3307590&key=56a267f2b0d7f1e2f6d3cc52d7890bdc"));
-                
-        //        using (var fs = new FileStream(_configuration["nseed:downloadpath"], FileMode.CreateNew))
-        //        {
-        //            await response3.Content.CopyToAsync(fs);
-        //        }
-        //        var response2 = await httpClient.GetAsync(_configuration["nseed:baseurl"] + _configuration["nseed:indexpath"]);
-        //        string res2 = await response2.Content.ReadAsStringAsync();
-        //        return Content(res2);
-        //    }
-        //    catch (HttpRequestException) { }
-
-
-        //    return Content("succ2");
-
-        }
-
+    }
 
 }
