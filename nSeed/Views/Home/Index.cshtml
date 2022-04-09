@@ -10,5 +10,44 @@
         Different rules, different time, a different life...
         The power of the king will make you lonely indeed. If you are prepared for that, then...
     </p>
-    <a class="btn btn-primary mt-4" asp-controller="nSeedLogin" asp-action="Index" asp->Enter nSeed</a>
+    <a class="btn btn-primary mt-4" asp-controller="nSeedLogin" asp-action="Index" >Enter nSeed</a>
+    @*<a class="btn btn-info mt-4" asp-controller="torrents" asp-action="Torrents">Enter nSeed v2</a>*@
 </div>
+
+
+<!-- TESTING, current writing front here -->
+
+
+<a href="JavaScript:void(0);" onclick="details(337450)">
+    details
+</a> |
+<a href="JavaScript:void(0);" onclick="downloadx(337450)">
+    download
+</a> 
+<p class="myres"></p>
+
+<script>
+    function downloadx(id) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", `https://localhost:44325/torrentdownload/{$id}`, true);
+        xhr.send();
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                var data = xhr.responseText;
+                alert(data);
+            }
+        }
+    }
+    function details(id) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `https://localhost:44325/torrentdetails/${id}`, true);
+        xhr.send();
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                var data = xhr.responseText;
+                //alert(data);
+                $('.myres').html(data);
+            }
+        }
+    }
+</script>

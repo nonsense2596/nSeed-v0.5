@@ -9,3 +9,7 @@
 
 
 5. invoke the qbit api @ torrent download
+
+6. do proper and appropriate filenames in torrentscontroller/torrentdownload/{id}
+
+

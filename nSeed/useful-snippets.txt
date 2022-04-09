@@ -1,0 +1,9 @@
+﻿
+# qbittorrent web api connection
+
+QBittorrentClientController qbcc = new QBittorrentClientController();
+await QBittorrentClientController.qbittorrentclient.LoginAsync("username", "pass");
+
+# qbittorrent web api example function call
+
+var ver = await QBittorrentClientController.qbittorrentclient.GetQBittorrentVersionAsync();

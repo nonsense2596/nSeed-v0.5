@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics;
 
 namespace nSeed.Global.Utils
 {
@@ -19,11 +20,17 @@ namespace nSeed.Global.Utils
 
         public static List<TorrentSearchResultData> read(string res)
         {
+
+            Debug.WriteLine("-----");
+            Debug.WriteLine(res);
+            Debug.WriteLine("-----");
+
             List<TorrentSearchResultData> result = new List<TorrentSearchResultData>();
 
             var doc = new HtmlDocument();
             doc.LoadHtml(res);
             var innercontainers = doc.DocumentNode.SelectNodes("//div[@class='box_torrent']");
+
             foreach (var (item, index) in innercontainers.Select((value, i) => (value, i)))
             {
                 var doc2 = new HtmlDocument();
