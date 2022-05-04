@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using nSeed.Models;
 
 namespace nSeed.Data
 {
@@ -12,5 +13,8 @@ namespace nSeed.Data
             : base(options)
         {
         }
+
+        public DbSet<DownloadedTorrent> DownloadedTorrents { get; set; }
+
     }
 }
