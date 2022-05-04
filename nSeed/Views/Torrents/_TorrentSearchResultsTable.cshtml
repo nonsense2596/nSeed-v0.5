@@ -52,21 +52,35 @@
     </tbody>
 </table>
 <script>
-    function download(id) {
+    const download = (id) => {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", `https://localhost:44325/torrentdownload/${id}`, true);
         xhr.send();
     }
-    function details(id) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", `https://localhost:44325/torrentdetails/${id}`, true);
-        xhr.send();
-        xhr.onload = () => {
-            if (xhr.status == 200) {
-                var data = xhr.responseText;
-                $("#details-" + id).html(data);
-                $("#details-" + id).css("display", "block");
+    const details = (id) => {
+        var currentElement = $("#details-" + id);
+        console.log(currentElement);
+        console.log(currentElement.data());
+        if (currentElement.children().length === 0) {
+            console.log("xhr and show");
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", `https://localhost:44325/torrentdetails/${id}`, true);
+            xhr.send();
+            xhr.onload = () => {
+                if (xhr.status == 200) {
+                    var data = xhr.responseText;
+                    currentElement.html(data);
+                    currentElement.css("display", "table-cell");
+                }
             }
         }
+        else if (currentElement.css("display") === "none") {
+            console.log("just show");
+            currentElement.css("display", "table-cell");
+        } else {
+            console.log("just hide");
+            currentElement.css("display", "none");
+        }
+
     }
 </script>
