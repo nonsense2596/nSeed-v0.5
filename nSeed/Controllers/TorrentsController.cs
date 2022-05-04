@@ -83,27 +83,22 @@ namespace nSeed.Controllers
 
         // downloads a specific torrent to the server
         [HttpPost("torrentdownload/{id}")]
-        public async Task<IActionResult> torrentdownload(int id)
+        public async Task<StatusCodeResult> Torrentdownload(int id)
         {
-
             try
             {
-
                 Uri uri = new Uri(_configuration["nseed:baseurl"] + _configuration["nseed:torrentspath"] + "?action=download&id=" + id + "&key=" + _configuration["nseed:key"]);
-                var response3 = await httpClient.GetAsync(uri);
+                var torrentToBeDownloaded = await httpClient.GetAsync(uri);
 
-                using (var fs = new FileStream(_configuration["nseed:downloadpath"] + "torrent" + DateTime.Now.Ticks + ".torrent", FileMode.CreateNew))
+                using (var fs = new FileStream(_configuration["nseed:downloadpath"] + id + "_" + DateTime.Now.Ticks + ".torrent", FileMode.CreateNew))
                 {
-                    await response3.Content.CopyToAsync(fs);
+                    await torrentToBeDownloaded.Content.CopyToAsync(fs);
                 }
-                var response2 = await httpClient.GetAsync(_configuration["nseed:baseurl"] + _configuration["nseed:indexpath"]);
-                string res2 = await response2.Content.ReadAsStringAsync();
-                return Content(res2);
+                return StatusCode(201);
             }
-            catch (HttpRequestException) { }
-
-
-            return Content("success");
+            catch (HttpRequestException) {
+                return StatusCode(500);
+            }   
         }
 
     }
