@@ -7,3 +7,11 @@ await QBittorrentClientController.qbittorrentclient.LoginAsync("username", "pass
 # qbittorrent web api example function call
 
 var ver = await QBittorrentClientController.qbittorrentclient.GetQBittorrentVersionAsync();
+
+
+
+
+PM>
+
+add-migration MIGRATION
+Update-Database

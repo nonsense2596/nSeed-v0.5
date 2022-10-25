@@ -9,17 +9,17 @@ namespace nSeed.ViewComponents
 {
     public class HeaderViewComponent: ViewComponent
     {
-        private readonly long kex;
-
-        public HeaderViewComponent()
-        {
-            this.kex = new DriveInfo("C:\\").AvailableFreeSpace;
-        }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            ViewData["StorageInfo"] = Global.Utils.SystemInformation.PrintDiskSpace();
+            ViewData["StorageInfo"] = "";
+
+            // asd+= String.Format("{0}Gb/{1}Gb ({2}% free)", totalBytesGb, freeBytesGb, freePercent);
+            List<Tuple<long,long,int>> diskSpaces = Global.Utils.SystemInformation.PrintDiskSpace();
+            foreach (var diskSpace in diskSpaces)
+            {
+                ViewData["StorageInfo"] += String.Format("{0}Gb/{1}Gb ({2}% free), ", diskSpace.Item1, diskSpace.Item2, diskSpace.Item3);
+            }
             return View("Default");
-            //return await Task.FromResult((IViewComponentResult)View("/Views/Shared/Components/Test/Default"));
         }
     }
 }

@@ -23,11 +23,14 @@ namespace nSeed
         {
             Configuration = configuration;
 
+            // TODO refactor this into something more useable 
             Global.Utils.TorrentSearchResultReader.InitConfiguration(Configuration);
+            Global.Utils.SystemInformation.InitConfiguration(Configuration);
             // TODO STARTUP CODE HERE, INITIALIZING QBIT AND HTTPHANDLER
         }
 
         public IConfiguration Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -35,11 +38,13 @@ namespace nSeed
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
 
             // TODO testing with this
