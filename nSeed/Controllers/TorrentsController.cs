@@ -40,22 +40,19 @@ namespace nSeed.Controllers
         public async Task<IActionResult> TorrentSearch([FromForm] TorrentSearchPostData tspd)
         {
 
-
-            var dictt = tspd.GetPostParametersDict();
-
-            Uri uri4 = new Uri(_configuration["nseed:baseurl"] + _configuration["nseed:searchpath"]);
-            var content4 = new FormUrlEncodedContent(tspd.GetPostParametersDict().ToEnumerable(true));
-            var request4 = new HttpRequestMessage()
+            Uri uri = new Uri(_configuration["nseed:baseurl"] + _configuration["nseed:searchpath"]);
+            var content = new FormUrlEncodedContent(tspd.GetPostParametersDict().ToEnumerable(true));
+            var request = new HttpRequestMessage()
             {
-                RequestUri = uri4,
+                RequestUri = uri,
                 Method = HttpMethod.Post,
-                Content = content4,
+                Content = content,
             };
-            request4.Headers.ExpectContinue = false;
-            var response3 = await httpClient.SendAsync(request4);
-            string res3 = await response3.Content.ReadAsStringAsync();
+            request.Headers.ExpectContinue = false;
+            var response = await httpClient.SendAsync(request);
+            string responseString = await response.Content.ReadAsStringAsync();
 
-            List<TorrentSearchResultData> torrentsearchresultdata = TorrentSearchResultReader.read(res3);
+            List<TorrentSearchResultData> torrentsearchresultdata = TorrentSearchResultReader.read(responseString);
             ViewData["torrentdata"] = torrentsearchresultdata;
             return View();
 
@@ -75,9 +72,11 @@ namespace nSeed.Controllers
                 var content = await response.Content.ReadAsStringAsync();
                 return Content(content);
             }
-            catch (HttpRequestException) { }
+            catch (HttpRequestException e) 
+            {
 
-            return Content("exception occured");
+                return Content(e.Message);
+            }
 
         }
 

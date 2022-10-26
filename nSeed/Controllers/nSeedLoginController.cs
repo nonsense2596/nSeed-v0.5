@@ -42,7 +42,7 @@ namespace nSeed
                 var response = await httpClient.GetAsync(_configuration["nseed:baseurl"]+ _configuration["nseed:indexpath"]);
                 string res = await response.Content.ReadAsStringAsync();
 
-                using (HttpContent contentt = response.Content)
+                using (HttpContent responseContent = response.Content)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.Found)
                     {
@@ -92,9 +92,11 @@ namespace nSeed
                     request.Headers.ExpectContinue = false;
                     var response = await httpClient.SendAsync(request);           // DISABLE NSEED LOGIN
                     string res = await response.Content.ReadAsStringAsync();
-                                                                                  // TODO DO SMTHING WITH THIS, MIGHT NOT BE NECESSARY THO
+                    // TODO DO SMTHING WITH THIS, MIGHT NOT BE NECESSARY THO
                 }
-                catch (HttpRequestException) { return false; }
+                catch (HttpRequestException) { 
+                    return false; 
+                }
             }
             return true;
 
@@ -103,9 +105,12 @@ namespace nSeed
 
         // invokes the login sequence and redirects to the search page if successful
         [HttpGet("Index")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Login()
         {
-            if (await DoLogin()) return RedirectToAction("Torrents", "Torrents");
+            if (await DoLogin())
+            {
+                return RedirectToAction("Torrents", "Torrents");
+            }
             return Content("failed login");
 
         }
