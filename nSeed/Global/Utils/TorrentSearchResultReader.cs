@@ -21,9 +21,6 @@ namespace nSeed.Global.Utils
         public static List<TorrentSearchResultData> read(string res)
         {
 
-            Debug.WriteLine("-----");
-            Debug.WriteLine(res);
-            Debug.WriteLine("-----");
 
             List<TorrentSearchResultData> result = new List<TorrentSearchResultData>();
 
@@ -61,7 +58,7 @@ namespace nSeed.Global.Utils
                     Match match = regex.Match(id2);
                     id = match.Groups[1].Value;
                 }
-                var downloadurl = "torrents.php?action=download&id=" + id + "&key=" + _configuration["nseed:key"];
+                var downloadurl = string.Format(_configuration["nseed:torrentdownloadurltemplate"], id, _configuration["nseed:key"]);
 
                 result.Add(new TorrentSearchResultData(name, categ, uploaddate, download, seed, leech, torrentsize, detail, id, downloadurl));
             }
