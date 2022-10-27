@@ -39,6 +39,9 @@ namespace nSeed.Controllers
         // landing page of the web application, displays the nseed login button
         public IActionResult Index()
         {
+            List<Tuple<long, long, int>> diskSpaces = SystemInformation.PrintDiskSpace();
+            ViewData["StorageInfo"] = diskSpaces;
+
             return View();
         }
 

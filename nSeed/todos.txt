@@ -13,3 +13,4 @@
 6. do proper and appropriate filenames in torrentscontroller/torrentdownload/{id}
 
 
+7. error handling in storage check
