@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+<link rel="stylesheet" href="~/@(nameof(nSeed)).styles.css" />
 <div class="text-center">
     <p class="font-weight-light font-italic text-left" style="max-width:600px; margin: auto;">
         If you had the strength, you could live. This is our contract.
@@ -14,30 +16,13 @@
 
 
     <div class="font-weight-light font-italic text-left" style="max-width:600px; margin: auto;">
-    @foreach (var item in ViewData["StorageInfo"] as List<Tuple<long, long, int>>)
+    @foreach (var item in ViewData["StorageInfo"] as List<DiskInformation>)
     {
-        <span>disk name here</span>
+        <span>@(item.DiskName)</span>
         <div class="outer">
-            <div class="inner" style="width:@(100-@item.Item3)%"></div>
+            <div class="inner" style="width:@(item.UsedPercentage())%"></div>
         </div>
     }
     </div>
-    <style>
-        .outer {
-            display: block;
-            height: 20px;
-            background: linear-gradient(90deg, #ecc2ad 0%, #fac18c 100%);
-            border-radius: 3px;
-            outline: 1px solid white;
-            margin-top: 3px;
-            margin-bottom: 10px;
-        }
-
-        .inner {
-            height: 20px;
-            background: linear-gradient(90deg, #D58D6A 0%, #d27e8a 100%);
-            border-radius: 3px;
-        }
-    </style>
 
 </div>

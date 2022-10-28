@@ -1,0 +1,15 @@
+﻿.outer {
+    display: block;
+    height: 20px;
+    background: #dfdfef;
+    border-radius: 3px;
+    outline: 1px solid white;
+    margin-top: 3px;
+    margin-bottom: 10px;
+}
+
+.inner {
+    height: 20px;
+    background: #1d56ab;
+    border-radius: 3px;
+}

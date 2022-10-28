@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using nSeed.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,25 +16,25 @@ namespace nSeed.Global.Utils
             _configuration = configuration;
         }
         
-        public static List<Tuple<long, long, int>> PrintDiskSpace()
+        public static List<DiskInformation> DiskInformation()
         {
-            List<Tuple<long, long, int>> diskInfoTuples = new List<Tuple<long,long,int>>();
+            List<DiskInformation> diskInformationList = new List<DiskInformation>();
+            
             IEnumerable<IConfigurationSection> DownloadRoots = _configuration.GetSection("nseed:downloadroots").GetChildren();
-            foreach (var DownloadRoot in DownloadRoots)
+            
+            foreach (var downloadRoot in DownloadRoots)
             {
-                DriveInfo drive = new DriveInfo(DownloadRoot.Value);
+                DriveInfo drive = new DriveInfo(downloadRoot.Value);
                 long totalBytes = drive.TotalSize;
                 long freeBytes = drive.AvailableFreeSpace;
+                
+                long totalBytesMb = (long)(totalBytes / Math.Pow(1024, 2));
+                long freeBytesMb = (long)(freeBytes / Math.Pow(1024, 2));
 
-                int freePercent = (int)((100 * freeBytes) / totalBytes);
-
-                long totalBytesGb = (long)(totalBytes / Math.Pow(1024, 3));
-                long freeBytesGb = (long)(freeBytes / Math.Pow(1024, 3));
-
-                diskInfoTuples.Add(Tuple.Create(totalBytesGb, freeBytesGb, freePercent));
+                diskInformationList.Add(new DiskInformation(downloadRoot.Value, totalBytesMb, freeBytesMb));
             }
 
-            return diskInfoTuples;
+            return diskInformationList;
         }
     }
 }

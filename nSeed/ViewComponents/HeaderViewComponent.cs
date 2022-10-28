@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using nSeed.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,10 +15,10 @@ namespace nSeed.ViewComponents
             ViewData["StorageInfo"] = "";
 
             // asd+= String.Format("{0}Gb/{1}Gb ({2}% free)", totalBytesGb, freeBytesGb, freePercent);
-            List<Tuple<long,long,int>> diskSpaces = Global.Utils.SystemInformation.PrintDiskSpace();
-            foreach (var diskSpace in diskSpaces)
+            List<DiskInformation> diskInformationList = Global.Utils.SystemInformation.DiskInformation();
+            foreach (var diskInformation in diskInformationList)
             {
-                ViewData["StorageInfo"] += String.Format("{0}Gb/{1}Gb ({2}% free), ", diskSpace.Item1, diskSpace.Item2, diskSpace.Item3);
+                ViewData["StorageInfo"] += String.Format("{0}Mb/{1}Mb ({2}% free), ", diskInformation.DiskSize, diskInformation.FreeSize, diskInformation.FreePercentage());
             }
             return View("Default");
         }
