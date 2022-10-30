@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using nSeed.Data;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,10 @@ namespace nSeed
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
             // TODO refactor this into something more useable 
             Global.Utils.TorrentSearchResultReader.InitConfiguration(Configuration);
             Global.Utils.SystemInformation.InitConfiguration(Configuration);
+            Global.Utils.TorrentDetailReader.InitConfiguration(Configuration);
             // TODO STARTUP CODE HERE, INITIALIZING QBIT AND HTTPHANDLER
         }
 

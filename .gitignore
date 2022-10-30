@@ -365,3 +365,4 @@ FodyWeavers.xsd
 # asp.net core temp
 appsettings.json
 appsettings.Development.json
+/nSeed/nseeddetaildata
