@@ -28,6 +28,7 @@ namespace nSeed
             Global.Utils.SystemInformation.InitConfiguration(Configuration);
             Global.Utils.TorrentDetailReader.InitConfiguration(Configuration);
             Global.Utils.TorrentNFOReader.InitConfiguration(Configuration);
+            Global.Utils.TorrentCommentsReader.InitConfiguration(Configuration);
             // TODO STARTUP CODE HERE, INITIALIZING QBIT AND HTTPHANDLER
         }
 
