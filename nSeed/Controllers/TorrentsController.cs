@@ -52,7 +52,7 @@ namespace nSeed.Controllers
             var response = await httpClient.SendAsync(request);
             string responseString = await response.Content.ReadAsStringAsync();
 
-            List<TorrentSearchResultData> torrentsearchresultdata = TorrentSearchResultReader.read(responseString);
+            List<TorrentSearchResultData> torrentsearchresultdata = TorrentPartsReader.readSearchResults(responseString);
             ViewData["torrentdata"] = torrentsearchresultdata;
             return View();
 

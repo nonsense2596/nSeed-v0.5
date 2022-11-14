@@ -24,6 +24,7 @@ namespace nSeed
         {
             Configuration = configuration;
             Global.Utils.TorrentPartsReader.InitConfiguration(Configuration);
+            Global.Utils.SystemInformation.InitConfiguration(Configuration);
             // TODO STARTUP CODE HERE, INITIALIZING QBIT AND HTTPHANDLER
         }
 

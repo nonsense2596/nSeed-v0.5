@@ -39,6 +39,13 @@ namespace nSeed.Controllers
         // landing page of the web application, displays the nseed login button
         public IActionResult Index()
         {
+            // read nseeddetaildata/detailsdata/pciso1.txt
+            //var filee = System.IO.File.ReadAllText(".\\nseeddetaildata\\hdeng3.txt");
+
+            //TorrentDropdownData tdd = TorrentDropdownReader.read(filee);
+            //int cunt = TorrentDropdownReader.commentCount(filee);
+            //return Content("");
+            
             ViewData["StorageInfo"] = SystemInformation.DiskInformation();
 
             return View();
