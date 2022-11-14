@@ -23,13 +23,7 @@ namespace nSeed
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            // TODO refactor this into something more useable 
-            Global.Utils.TorrentSearchResultReader.InitConfiguration(Configuration);
-            Global.Utils.SystemInformation.InitConfiguration(Configuration);
-            Global.Utils.TorrentDetailReader.InitConfiguration(Configuration);
-            Global.Utils.TorrentNFOReader.InitConfiguration(Configuration);
-            Global.Utils.TorrentCommentsReader.InitConfiguration(Configuration);
-            Global.Utils.TorrentDropdownReader.InitConfiguration(Configuration);
+            Global.Utils.TorrentPartsReader.InitConfiguration(Configuration);
             // TODO STARTUP CODE HERE, INITIALIZING QBIT AND HTTPHANDLER
         }
 
